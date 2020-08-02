@@ -16,6 +16,8 @@ from pygame.time import (
 	Clock,
 )
 
+from .constants import constants
+
 
 pg_init()
 
@@ -26,9 +28,7 @@ class App:
 	'''
 
 	def __init__(self):
-		self.width: int = 640
-		self.height: int = 480
-		self.surface: Surface = set_mode((self.width, self.height))
+		self.surface: Surface = set_mode((constants.WIDTH, constants.HEIGHT))
 
 		self.clock = Clock()
 		
@@ -40,6 +40,8 @@ class App:
 				event: EventType = e
 				if event.type == pg_QUIT:
 					self.running = False
+
+			self.surface.fill(constants.colour.LIGHT_GREY)
 
 			update_display()
 			self.clock.tick(60)
