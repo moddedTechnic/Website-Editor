@@ -16,9 +16,9 @@ from typing import List, Tuple
 from window.constants import constants
 colour = constants.colour.flat_ui.gb
 Colour = constants.colour.Colour
+from window.tools import rounded_rect
 
 from .button import ButtonBase
-from window.tools import rounded_rect
 
 
 class CheckBox(ButtonBase):
