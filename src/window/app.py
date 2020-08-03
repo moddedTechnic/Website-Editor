@@ -85,6 +85,17 @@ class App:
 
 		return self
 
+	def __isub__(self, other):
+		if issubclass(type(other), ComponentBase):
+			if issubclass(type(other), ButtonBase):
+				self.buttons.remove(other)
+			elif isinstance(other, Slider):
+				self.sliders.remove(other)
+			else:
+				self.components.remove(other)
+
+		return self
+
 	def dispatch(self, event_type: Event, event_data: Dict):
 		if event_type in (MOUSEBUTTONDOWN_EVENT, MOUSEBUTTONUP_EVENT,):
 			direction = 0 if event_type == MOUSEBUTTONUP_EVENT else 1
