@@ -20,11 +20,8 @@ from pygame.time import (
 from typing import Dict
 
 
-from .components import (
-	Button,
-	ToggleButton,
-	CheckBox,
-	ToggleSwitch,
+from .components.button import (
+	ButtonBase,
 )
 from .constants import constants
 from .event import Event
@@ -46,31 +43,6 @@ class App:
 		self.running = True
 
 		self.buttons = []
-		self.buttons.append( Button(
-			self.surface,
-			(100, 50, 100, 50),
-			colour.SKIRRET_GREEN, colour.NASTURCIAN_FLOWER,
-			lambda: print('Button'),
-			'Button'
-		) )
-		self.buttons.append( ToggleButton(
-			self.surface,
-			(50, 150, 200, 50),
-			colour.SKIRRET_GREEN, colour.NASTURCIAN_FLOWER,
-			lambda state: print(f'Toggle Button: {state}'),
-			'Toggle Button'
-		) )
-		self.buttons.append( CheckBox(
-			self.surface,
-			(50, 250, 50, 50),
-			lambda state: print(f'Check Box: {state}')
-		) )
-		self.buttons.append( ToggleSwitch(
-			self.surface,
-			(50, 350, 100, 50),
-			colour.SKIRRET_GREEN, colour.NASTURCIAN_FLOWER,
-			lambda state: print(f'Toggle Switch: {state}')
-		) )
 
 	def __call__(self):
 		while self.running:
@@ -89,6 +61,16 @@ class App:
 			self.clock.tick(60)
 
 		pg_quit()
+
+	def __iadd__(self, other):
+		if isinstance(other, ButtonBase):
+			other.surface = self.surface
+			self.buttons.append(other)
+
+		else:
+			raise NotImplementedError(f'Cannot add object of type {type(other)} to an app')
+
+		return self
 
 	def dispatch(self, event_type: Event, event_data: Dict):
 		if event_type in (MOUSEBUTTONDOWN_EVENT, MOUSEBUTTONUP_EVENT,):
