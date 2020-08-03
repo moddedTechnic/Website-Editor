@@ -22,8 +22,8 @@ from .button import ButtonBase
 
 
 class CheckBox(ButtonBase):
-	def __init__(self, surface: Surface, rect: Rect, action):
-		super().__init__(surface, rect, action)
+	def __init__(self, rect: Rect, action):
+		super().__init__(rect, action)
 		self.pressed: bool = False
 
 	def render(self):

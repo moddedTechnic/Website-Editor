@@ -18,14 +18,17 @@ Colour = constants.colour.Colour
 from window.tools import draw_text, fonts, rounded_rect
 
 class ButtonBase:
-	def __init__(self, surface: Surface, rect: Rect, action):
-		self.surface: Surface = surface
+	def __init__(self, rect: Rect, action):
+		self.surface: Surface = None
 		self.rect: Rect = Rect(rect)
 		self.action = action
 
 	def __call__(self, x, y, direction):
 		if self.rect.collidepoint(x, y):
 			self.on_press(direction)
+
+		if direction == 0:
+			self.on_release()
 
 	@abstractmethod
 	def render(self):
@@ -35,9 +38,12 @@ class ButtonBase:
 	def on_press(self, direction):
 		pass
 
+	def on_release(self):
+		pass
+
 class Button(ButtonBase):
-	def __init__(self, surface: Surface, rect: Rect, c_on: Colour, c_off: Colour, action, label: str = '', active_high: bool = True):
-		super().__init__(surface, rect, action)
+	def __init__(self, rect: Rect, c_on: Colour, c_off: Colour, action, label: str = '', active_high: bool = True):
+		super().__init__(rect, action)
 		self.c_on: Colour = c_on
 		self.c_off: Colour = c_off
 		self.pressed = False
@@ -59,6 +65,9 @@ class Button(ButtonBase):
 		if self.pressed == self.active_high:
 			self.action()
 
+	def on_release(self):
+		self.pressed = False
+
 
 class ToggleButton(Button):
 	def __init__(self, *args, **kwargs):
@@ -68,3 +77,6 @@ class ToggleButton(Button):
 		if direction == 1:
 			self.pressed = not self.pressed
 			self.action(self.pressed)
+
+	def on_release(self):
+		pass
