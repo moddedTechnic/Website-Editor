@@ -1,0 +1,10 @@
+{
+	"width": 1280,
+	"height": 720,
+
+	"colour_scheme": {
+		"bg": "$BLUE_NIGHTS",
+		"base": "$CHAIN_GANG_GREY",
+		"handle": "$HINT_OF_PENSIVE"
+	}
+}
