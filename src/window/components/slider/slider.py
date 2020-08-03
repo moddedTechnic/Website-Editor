@@ -51,7 +51,6 @@ class Slider(ComponentBase):
 			self.on_drag(x, y)
 
 		c = self.c_off
-		# c = colour.CHAIN_GANG_GREY
 		stretched_circle(self.surface, self.rect, c)
 
 		r = self.rect.copy()
