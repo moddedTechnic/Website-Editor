@@ -14,6 +14,14 @@ colour = constants.colour.flat_ui.gb
 
 
 if __name__ == '__main__':
+	from os import system
+	from platform import system as get_os
+	os = get_os()
+	if os == 'Windows':
+		system('cls')
+	else:
+		system('clear')
+
 	app = App()
 
 	app += Button(
