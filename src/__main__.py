@@ -6,6 +6,9 @@ from window.components.button import (
 	CheckBox,
 	ToggleSwitch,
 )
+from window.components.slider import (
+	Slider,
+)
 from window.constants import constants
 colour = constants.colour.flat_ui.gb
 
@@ -36,6 +39,12 @@ if __name__ == '__main__':
 		(50, 350, 100, 50),
 		colour.SKIRRET_GREEN, colour.NASTURCIAN_FLOWER,
 		lambda state: print(f'Toggle Switch: {state}')
+	)
+
+	app += Slider(
+		(50, 450, 150, 10),
+		colour.SKIRRET_GREEN, colour.CHAIN_GANG_GREY,
+		lambda level: print(f'Slider: {level}')
 	)
 
 	app()
