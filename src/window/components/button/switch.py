@@ -20,6 +20,8 @@ class ToggleSwitch(CheckBox):
 
 	def __init__(self, rect: Rect, c_on: Colour, c_off: Colour, action, direction: int = -1):
 		super().__init__(rect, action)
+		self._name = 'ToggleSwitch'
+		
 		self.c_on = c_on
 		self.c_off = c_off
 		self.direction = direction if direction in ToggleSwitch.directions else (

@@ -15,12 +15,14 @@ from window.constants import constants
 colour = constants.colour.flat_ui.gb
 Colour = constants.colour.Colour
 
+from window.components import ComponentBase
 from window.tools import draw_text, fonts, rounded_rect
 
-class ButtonBase:
+class ButtonBase(ComponentBase):
 	def __init__(self, rect: Rect, action):
-		self.surface: Surface = None
-		self.rect: Rect = Rect(rect)
+		super().__init__(rect)
+		self._name = 'ButtonBase'
+
 		self.action = action
 
 	def __call__(self, x, y, direction):
@@ -31,19 +33,18 @@ class ButtonBase:
 			self.on_release()
 
 	@abstractmethod
-	def render(self):
-		pass
-
-	@abstractmethod
 	def on_press(self, direction):
 		pass
 
 	def on_release(self):
 		pass
 
+
 class Button(ButtonBase):
 	def __init__(self, rect: Rect, c_on: Colour, c_off: Colour, action, label: str = '', active_high: bool = True):
 		super().__init__(rect, action)
+		self._name = 'Button'
+		
 		self.c_on: Colour = c_on
 		self.c_off: Colour = c_off
 		self.pressed = False
@@ -72,6 +73,7 @@ class Button(ButtonBase):
 class ToggleButton(Button):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		self._name = 'ToggleButton'
 
 	def on_press(self, direction):
 		if direction == 1:
