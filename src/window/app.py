@@ -20,7 +20,12 @@ from pygame.time import (
 from typing import Dict
 
 
-from .components import Button, ToggleButton, CheckBox
+from .components import (
+	Button,
+	ToggleButton,
+	CheckBox,
+	ToggleSwitch,
+)
 from .constants import constants
 from .event import Event
 
@@ -59,6 +64,12 @@ class App:
 			self.surface,
 			(50, 250, 50, 50),
 			lambda state: print(f'Check Box: {state}')
+		) )
+		self.buttons.append( ToggleSwitch(
+			self.surface,
+			(50, 350, 100, 50),
+			colour.SKIRRET_GREEN, colour.NASTURCIAN_FLOWER,
+			lambda state: print(f'Toggle Switch: {state}')
 		) )
 
 	def __call__(self):
