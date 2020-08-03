@@ -4,6 +4,7 @@ from pygame import (
 	quit as pg_quit,
 	QUIT as QUIT_EVENT,
 	MOUSEBUTTONDOWN as MOUSEBUTTONDOWN_EVENT, MOUSEBUTTONUP as MOUSEBUTTONUP_EVENT,
+	MOUSEMOTION as MOUSEMOTION_EVENT,
 )
 from pygame.display import (
 	set_mode, set_caption,
@@ -19,10 +20,10 @@ from pygame.time import (
 
 from typing import Dict
 
+from .components import ComponentBase
+from .components.button import ButtonBase
+from .components.slider import Slider
 
-from .components.button import (
-	ButtonBase,
-)
 from .constants import constants
 from .event import Event
 
@@ -43,6 +44,8 @@ class App:
 		self.running = True
 
 		self.buttons = []
+		self.sliders = []
+		self.components = []
 
 	def __call__(self):
 		while self.running:
@@ -55,7 +58,9 @@ class App:
 
 			self.surface.fill(colour.BLUE_NIGHTS)
 
+			[c.render() for c in self.components]
 			[b.render() for b in self.buttons]
+			[s.render() for s in self.sliders]
 
 			update_display()
 			self.clock.tick(60)
@@ -63,9 +68,17 @@ class App:
 		pg_quit()
 
 	def __iadd__(self, other):
-		if isinstance(other, ButtonBase):
-			other.surface = self.surface
-			self.buttons.append(other)
+		print(f'Attempting to mount component: {other}')
+
+		if issubclass(type(other), ComponentBase):
+			other.mount(self.surface)
+
+			if issubclass(type(other), ButtonBase):
+				self.buttons.append(other)
+			elif isinstance(other, Slider):
+				self.sliders.append(other)
+			else:
+				self.components.append(other)
 
 		else:
 			raise NotImplementedError(f'Cannot add object of type {type(other)} to an app')
@@ -80,3 +93,11 @@ class App:
 			
 			if button == 1:
 				[b(x, y, direction) for b in self.buttons]
+				[s(x, y, direction) for s in self.sliders]
+
+		elif event_type == MOUSEMOTION_EVENT:
+			button_pressed = event_data['buttons'][0] == 1
+			x, y = event_data['pos']
+
+			if button_pressed:
+				[s(x, y, 2) for s in self.sliders]
