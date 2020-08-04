@@ -3,8 +3,8 @@
 	"height": 720,
 
 	"colour_scheme": {
-		"bg": "$BLUE_NIGHTS",
-		"base": "$CHAIN_GANG_GREY",
-		"handle": "$HINT_OF_PENSIVE"
+		"bg": "$GB.BLUE_NIGHTS",
+		"base": "$GB.CHAIN_GANG_GREY",
+		"handle": "$GB.HINT_OF_PENSIVE"
 	}
 }
