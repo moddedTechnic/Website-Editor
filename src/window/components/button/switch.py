@@ -5,9 +5,11 @@ from pygame.draw import (
 	rect
 )
 
-from window.constants import constants
-colour = constants.colour.flat_ui.gb
-Colour = constants.colour.Colour
+
+from config import settings
+
+from window.colour import colour
+Colour = colour.Colour
 from window.tools import rounded_rect, stretched_circle, circle
 
 from .check_box import CheckBox
@@ -29,7 +31,7 @@ class ToggleSwitch(CheckBox):
 		)
 
 	def render(self):
-		stretched_circle(self.surface, self.rect, colour.CHAIN_GANG_GREY)
+		stretched_circle(self.surface, self.rect, settings.colour_scheme.base)
 		c = self.c_on if self.pressed else self.c_off
 		r = self.rect.copy()
 		r.x += r.width * .05
@@ -40,4 +42,4 @@ class ToggleSwitch(CheckBox):
 
 		r.x += r.width / 4 * (3 if self.pressed else 1)
 		r.y += r.height / 2
-		circle(self.surface, r.x, r.y, min(r.width, r.height) / 2, colour.MAZARINE_BLUE)
+		circle(self.surface, r.x, r.y, min(r.width, r.height) / 2, settings.colour_scheme.handle)

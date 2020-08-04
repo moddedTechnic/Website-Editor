@@ -11,9 +11,9 @@ from pygame.font import (
 	Font
 )
 
-from window.constants import constants
-colour = constants.colour.flat_ui.gb
-Colour = constants.colour.Colour
+from window.colour import colour
+Colour = colour.Colour
+colour = colour.flat_ui.gb
 
 from window.components import ComponentBase
 from window.tools import draw_text, fonts, rounded_rect

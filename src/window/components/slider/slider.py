@@ -1,14 +1,17 @@
 from pygame import Surface, Rect
 from pygame.mouse import get_pos as get_mouse_pos
 
+
+from config import settings
+
 from maths import (
 	clamp,
 	lerp, lerp_colour,
 )
 
-from window.constants import constants
-colour = constants.colour.flat_ui.gb
-Colour = constants.colour.Colour
+from window.colour import colour
+Colour = colour.Colour
+colour = colour.flat_ui.gb
 
 from window.components import ComponentBase
 from window.tools import stretched_circle, circle
@@ -58,7 +61,7 @@ class Slider(ComponentBase):
 		c = self.c_on
 		stretched_circle(self.surface, r, c)
 
-		c = colour.HINT_OF_PENSIVE
+		c = settings.colour_scheme.handle
 		# c = lerp_colour(self.c_off, self.c_on, self.value)
 		circle(
 			self.surface,

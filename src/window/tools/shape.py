@@ -5,8 +5,8 @@ from pygame.gfxdraw import (
     filled_circle
 )
 
-from window.constants import constants
-Colour = constants.colour.Colour
+from window.colour import colour
+Colour = colour.Colour
 
 
 def circle(surface: Surface, x: int, y: int, r: int, colour):
