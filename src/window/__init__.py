@@ -1,2 +1,2 @@
 from .app import App
-from .constants import constants
+from .colour import colour
