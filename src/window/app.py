@@ -20,14 +20,14 @@ from pygame.time import (
 
 from typing import Dict
 
+
+from config import settings
+
 from .components import ComponentBase
 from .components.button import ButtonBase
 from .components.slider import Slider
 
-from .constants import constants
 from .event import Event
-
-colour = constants.colour.flat_ui.gb
 
 
 pg_init()
@@ -39,7 +39,7 @@ class App:
 	'''
 
 	def __init__(self):
-		self.surface: Surface = set_mode((constants.WIDTH, constants.HEIGHT))
+		self.surface: Surface = set_mode((settings.width, settings.height))
 		self.clock = Clock()
 		self.running = True
 
@@ -56,7 +56,7 @@ class App:
 				else:
 					self.dispatch(event.type, event.dict)
 
-			self.surface.fill(colour.BLUE_NIGHTS)
+			self.surface.fill(settings.colour_scheme.background)
 
 			[c.render() for c in self.components]
 			[b.render() for b in self.buttons]

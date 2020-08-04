@@ -9,8 +9,8 @@ from window.components.button import (
 from window.components.slider import (
 	Slider,
 )
-from window.constants import constants
-colour = constants.colour.flat_ui.gb
+from window.colour import colour
+colour = colour.flat_ui.gb
 
 
 if __name__ == '__main__':
